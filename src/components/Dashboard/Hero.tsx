@@ -23,20 +23,21 @@ export const DashboardHero = () => {
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div className="w-full flex flex-col lg:flex-row h-auto lg:h-[312px] bg-dark-600">
+    <div className="w-full flex flex-col lg:flex-row h-auto min-h-[312px] bg-dark-600">
       <div className="relative w-full lg:w-[40%] h-[312px] bg-cover bg-center" style={{ backgroundImage: `url(${d01})` }}>
         <div className="absolute inset-0 bg-primary-300/10 mix-blend-overlay" />
 
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <div className="relative w-[180px] h-[180px] flex items-center justify-center">
-            <svg className="absolute w-full h-full transform -rotate-90 drop-shadow-[0_0_6px_rgba(252,116,0,0.2)]">
+            <svg className="absolute w-full h-full transform -rotate-90">
               <circle
                 cx="90"
                 cy="90"
                 r={radius}
                 fill="transparent"
-                stroke="rgba(255,255,255,0.2)"
+                stroke="transparent"
                 strokeWidth="3"
+                className="drop-shadow-[0_0_6px_#FC7400]"
               />
               <circle
                 cx="90"
@@ -54,9 +55,9 @@ export const DashboardHero = () => {
               />
             </svg>
 
-            <div className="relative text-light font-sans text-shadow-md flex items-baseline gap-1">
-              <span className="text-lg font-medium drop-shadow-md">05/21</span>
-              <span className="text-2xl font-medium drop-shadow-md">{percentage}%</span>
+            <div className="absolute inset-0 flex items-center justify-center text-light font-sans text-shadow-md gap-1">
+              <span className="text-[18px] leading-[22px] font-sans font-normal drop-shadow-[0_0_6px_#FC7400]">05/21</span>
+              <span className="text-[25px] leading-[30px] font-sans font-normal drop-shadow-[0_0_6px_#FC7400]">{percentage}%</span>
             </div>
           </div>
         </div>
