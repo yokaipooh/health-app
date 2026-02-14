@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand Colors - Based on Figma 'Vitality' Palette */
+  --color-primary: #F2994A;
+  /* Primary / 400 - Main Orange */
+  --color-primary-light: #FCD683;
+  /* Primary / 300 - Yellow/Gold */
+  --color-primary-dark: #E08736;
+  /* Primary / 500 - Darker Orange */
+
+  --color-secondary: #6FCF97;
+  /* Secondary / 300 - Mint Green */
+
+  /* Neutral Colors */
+  --color-background: #F8FAFC;
+  /* Light Gray Background */
+  --color-surface: #FFFFFF;
+  /* White Surface */
+  --color-surface-hover: #F3F4F6;
+
+  /* Text Colors */
+  --color-text-primary: #333333;
+  /* Black - dark / 500 */
+  --color-text-secondary: #828282;
+  /* Gray / 400 */
+  --color-text-muted: #BDBDBD;
+
+  --color-border: #E0E0E0;
+
+  /* Fonts */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-heading: "Nunito", "Inter", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Inter", system-ui, sans-serif;
+
+  /* Gradients */
+  --image-gradient-primary: linear-gradient(135deg, #FCD683 0%, #F2994A 100%);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+  }
+}
+
+@utility bg-gradient-brand {
+  background-image: var(--image-gradient-primary);
+}
