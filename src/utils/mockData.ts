@@ -1,3 +1,4 @@
+
 import d01 from '../assets/images/d01.jpg';
 import d02 from '../assets/images/d02.jpg';
 import l01 from '../assets/images/l01.jpg';
@@ -16,25 +17,12 @@ import col5 from '../assets/images/column-5.jpg';
 import col6 from '../assets/images/column-6.jpg';
 import col7 from '../assets/images/column-7.jpg';
 import col8 from '../assets/images/column-8.jpg';
-
-export type MockMealItem = {
-  id: number;
-  imageUrl: string;
-  date: string;
-  label: string;
-};
-
-export type MockColumnItem = {
-  id: number;
-  imageUrl: string;
-  date: string;
-  time: string;
-  title: string;
-  tags: string[];
-};
+import type { MockBodyRecordItem, MockColumnItem, MockDiaryItem, MockExerciseItem, MockMealItem } from '../types/common.type';
 
 let mealIdCounter = 1;
 let columnIdCounter = 1;
+let exerciseIdCounter = 1;
+let diaryIdCounter = 1;
 
 const MEAL_IMAGES = {
   Morning: [m01, m02, m03],
@@ -45,10 +33,6 @@ const MEAL_IMAGES = {
 
 const COLUMN_IMAGES = [col1, col2, col3, col4, col5, col6, col7, col8];
 
-/**
- * Generates an array of mock meal history items.
- * @param count Number of items to generate.
- */
 export const generateMealHistory = (count: number): MockMealItem[] => {
   const items: MockMealItem[] = [];
   const labels = ['Morning', 'Lunch', 'Dinner', 'Snack'];
@@ -57,7 +41,6 @@ export const generateMealHistory = (count: number): MockMealItem[] => {
     const id = mealIdCounter++;
     const label = labels[id % 4] as keyof typeof MEAL_IMAGES;
     const images = MEAL_IMAGES[label];
-    // Cycle through images for this label
     const imageUrl = images[id % images.length];
 
     items.push({
@@ -70,10 +53,6 @@ export const generateMealHistory = (count: number): MockMealItem[] => {
   return items;
 };
 
-/**
- * Generates an array of mock column articles.
- * @param count Number of items to generate.
- */
 export const generateColumnArticles = (count: number): MockColumnItem[] => {
   const items: MockColumnItem[] = [];
   const titles = [
@@ -96,4 +75,73 @@ export const generateColumnArticles = (count: number): MockColumnItem[] => {
     });
   }
   return items;
+};
+
+export const generateExerciseHistory = (count: number): MockExerciseItem[] => {
+  const items: MockExerciseItem[] = [];
+  for (let i = 0; i < count; i++) {
+    const id = exerciseIdCounter++;
+    items.push({
+      id,
+      title: '家事全般（立位・軽い）',
+      kcal: '26kcal',
+      time: '10 min',
+    });
+  }
+  return items;
+};
+
+export const generateDiaryEntries = (count: number): MockDiaryItem[] => {
+  const items: MockDiaryItem[] = [];
+  for (let i = 0; i < count; i++) {
+    const id = diaryIdCounter++;
+    items.push({
+      id,
+      date: '2021.05.21',
+      time: '23:25',
+      title: '私の日記の記録が一部表示されます。',
+      content: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト…',
+    });
+  }
+  return items;
+};
+
+export const generateBodyRecordData = (type: string = '年'): MockBodyRecordItem[] => {
+  // Mock data variations based on filter type
+  switch (type) {
+    case '日':
+      return Array.from({ length: 24 }, (_, i) => ({
+        name: `${i}:00`,
+        weight: 60 + Math.random() * 2 - 1,
+        bodyFat: 20 + Math.random() * 2 - 1,
+      }));
+    case '週':
+      return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => ({
+        name: day,
+        weight: 55 + Math.random() * 5,
+        bodyFat: 22 + Math.random() * 3,
+      }));
+    case '月':
+      return Array.from({ length: 30 }, (_, i) => ({
+        name: `${i + 1}日`,
+        weight: 58 + Math.random() * 5 - 2.5,
+        bodyFat: 21 + Math.random() * 4 - 2,
+      }));
+    case '年':
+    default:
+      return [
+        { name: '6月', weight: 90, bodyFat: 80 },
+        { name: '7月', weight: 85, bodyFat: 75 },
+        { name: '8月', weight: 60, bodyFat: 55 },
+        { name: '9月', weight: 70, bodyFat: 60 },
+        { name: '10月', weight: 65, bodyFat: 50 },
+        { name: '11月', weight: 60, bodyFat: 45 },
+        { name: '12月', weight: 68, bodyFat: 43 },
+        { name: '1月', weight: 55, bodyFat: 40 },
+        { name: '2月', weight: 52, bodyFat: 35 },
+        { name: '3月', weight: 48, bodyFat: 30 },
+        { name: '4月', weight: 45, bodyFat: 25 },
+        { name: '5月', weight: 42, bodyFat: 20 },
+      ];
+  }
 };

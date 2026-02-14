@@ -5,8 +5,9 @@ import IconCup from '../assets/svgs/icon_cup.svg?react';
 import IconKnife from '../assets/svgs/icon_knife.svg?react';
 import { LoadMoreButton } from '../components/Button/LoadMoreButton';
 import { MealCard } from '../components/Card';
+import { DashboardHero } from '../components/Dashboard/Hero';
 import { HexagonButton } from '../components/HexagonButton';
-import type { MockMealItem } from '../utils/mockData';
+import type { MockMealItem } from '../types/common.type';
 import { generateMealHistory } from '../utils/mockData';
 
 export const Dashboard = () => {
@@ -47,6 +48,7 @@ export const Dashboard = () => {
 
   return (
     <div className="flex flex-col">
+      <DashboardHero />
       <section className="space-y-6 max-w-[960px] mx-auto w-full px-4 mb-16">
         <div className="flex justify-center gap-16 py-6">
           <HexagonButton

@@ -56,3 +56,20 @@
 @utility bg-gradient-brand {
   background-image: var(--image-gradient-primary);
 }
+
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #777777;
+    border-radius: 3px;
+    margin-block: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #FFCC21;
+    border-radius: 3px;
+  }
+}

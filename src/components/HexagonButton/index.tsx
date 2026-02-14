@@ -21,7 +21,7 @@ export const HexagonButton = ({ icon: Icon, label, onClick }: HexagonButtonProps
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full pb-1">
         <Icon className="w-14 h-14 text-white mb-1" />
-        <span className="text-white font-sans text-xl font-bold tracking-wide">{label}</span>
+        <span className="text-white font-sans text-xl font-normal tracking-wide">{label}</span>
       </div>
     </button>
   );

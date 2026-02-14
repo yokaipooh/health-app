@@ -3,7 +3,7 @@ import { flushSync } from 'react-dom';
 
 import { LoadMoreButton } from '../components/Button/LoadMoreButton';
 import { ColumnCard } from '../components/Card';
-import type { MockColumnItem } from '../utils/mockData';
+import type { MockColumnItem } from '../types/common.type';
 import { generateColumnArticles } from '../utils/mockData';
 
 const RECOMMENDATIONS = [
@@ -48,13 +48,13 @@ export const ColumnPage = () => {
         {RECOMMENDATIONS.map((item, index) => (
           <div
             key={index}
-            className="bg-dark-600 text-light py-8 px-2 flex flex-col items-center justify-center gap-2 cursor-pointer hover:opacity-90 transition-opacity min-h-[144px]"
+            className="bg-dark-600 text-light pt-6 pb-5.5 px-2 flex flex-col items-center justify-center cursor-pointer hover:opacity-90 transition-opacity min-h-[144px]"
           >
             <h2 className="text-[22px] font-sans font-normal text-primary-300 text-center wrap-break-word leading-[27px] tracking-[0.11px]">
               {item.title}
             </h2>
-            <div className="w-[56px] h-px bg-light my-2"></div>
-            <p className="font-jp text-lg font-light">
+            <div className="w-[56px] h-px bg-light mt-2.25 mb-2"></div>
+            <p className="font-jp text-lg font-light leading-[26px]">
               {item.subTitle}
             </p>
           </div>

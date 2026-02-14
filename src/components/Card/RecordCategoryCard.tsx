@@ -15,10 +15,10 @@ export const RecordCategoryCard = ({ imageUrl, title, subTitle, onClick }: Recor
         />
 
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-2">
-          <h3 className="text-primary-300 text-2xl font-sans font-bold uppercase tracking-widest">
+          <h3 className="text-primary-300 text-[25px] leading-[30px] font-sans font-normal uppercase tracking-widest">
             {title}
           </h3>
-          <div className="bg-primary-400 text-light px-5 py-0.5 min-w-[160px] text-center font-jp text-sm">
+          <div className="bg-primary-400 text-light pt-0.25 pb-0.75 w-[160px] text-center font-jp text-sm leading-[20px] font-light">
             {subTitle}
           </div>
         </div>
