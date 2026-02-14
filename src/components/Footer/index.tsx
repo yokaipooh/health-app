@@ -8,8 +8,8 @@ const Footer = () => {
     { label: 'お問い合わせ' },
   ];
   return (
-    <footer className="h-32 px-40 py-14 bg-dark-500 text-light">
-      <div className="max-w-[1280px] mx-auto flex items-center flex-wrap gap-12 font-jp font-light leading-4 text-xs">
+    <footer className="w-full bg-dark-500 text-light py-8 px-4 md:px-40 md:py-14">
+      <div className="max-w-[1280px] mx-auto flex items-center flex-wrap gap-4 md:gap-12 font-jp font-light leading-4 text-xs">
         {footerItems.map((item, index) => (
           <p key={index}>{item.label}</p>
         ))}

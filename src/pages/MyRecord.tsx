@@ -7,7 +7,7 @@ import imgMyDiary from '../assets/images/MyRecommend-3.jpg';
 
 import { RecordCategoryCard } from '../components/Card/RecordCategoryCard';
 import { BodyRecordChart } from '../components/Record/BodyRecordChart';
-import { DiaryGrid } from '../components/Record/DiaryGrid';
+import { Diary } from '../components/Record/Diary';
 import { ExerciseList } from '../components/Record/ExerciseList';
 import type { MockDiaryItem } from '../types/common.type';
 import { generateDiaryEntries } from '../utils/mockData';
@@ -44,7 +44,7 @@ export const MyRecord = () => {
   };
 
   return (
-    <section className="space-y-14 max-w-[960px] mx-auto w-full mt-14 mb-16 px-4 md:px-0">
+    <section className="space-y-14 max-w-[960px] mx-auto w-full mt-14 mb-16 px-4 lg:px-0">
 
       {/* Top Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -72,7 +72,7 @@ export const MyRecord = () => {
       {/* My Diary */}
       <div id="my-diary" className="w-full">
         <h2 className="text-[22px] leading-[27px] font-sans font-normal text-dark-500 mb-2">MY DIARY</h2>
-        <DiaryGrid initialItems={diaryItems} />
+        <Diary initialItems={diaryItems} />
       </div>
 
     </section>

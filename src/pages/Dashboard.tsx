@@ -50,7 +50,7 @@ export const Dashboard = () => {
     <div className="flex flex-col">
       <DashboardHero />
       <section className="space-y-6 max-w-[960px] mx-auto w-full px-4 mb-16">
-        <div className="flex justify-center gap-16 py-6">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-16 py-6 font-sans">
           <HexagonButton
             icon={IconKnife}
             label="Morning"

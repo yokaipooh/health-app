@@ -43,7 +43,7 @@ export const ColumnPage = () => {
   };
 
   return (
-    <section className="space-y-14 max-w-[960px] mx-auto w-full mt-14 pb-16">
+    <section className="space-y-8 md:space-y-14 max-w-[960px] mx-auto w-full mt-8 md:mt-14 pb-16 px-4 lg:px-0">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {RECOMMENDATIONS.map((item, index) => (
           <div

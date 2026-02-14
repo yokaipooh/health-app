@@ -37,6 +37,8 @@ const NAV_ITEMS = [
 
 const MENU_ITEMS = [
   { label: '自分の記録', path: '/my-record', protected: true },
+  { label: 'チャレンジ', path: '/challenge', protected: true },
+  { label: 'お知らせ', path: '/notice', protected: true },
   { label: '体重グラフ', path: '/weight-graph', protected: true },
   { label: '目標', path: '/goal', protected: true },
   { label: '選択中のコース', path: '/selected-course', protected: true },
@@ -91,7 +93,7 @@ export const Header = () => {
         </div>
 
         <div className="flex items-center gap-4 font-jp font-light relative">
-          <nav className="flex items-center">
+          <nav className="hidden md:flex items-center">
             {filteredNavItems.map((item, index) => {
               const Icon = item.icon;
               return (
