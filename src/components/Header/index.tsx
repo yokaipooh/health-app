@@ -7,6 +7,7 @@ import IconInfo from '../../assets/svgs/icon_info.svg?react';
 import IconMemo from '../../assets/svgs/icon_memo.svg?react';
 import IconMenu from '../../assets/svgs/icon_menu.svg?react';
 import Logo from '../../assets/svgs/logo.svg?react';
+import { usePageTransition } from '../../hooks/usePageTransition';
 
 const NAV_ITEMS = [
   {
@@ -41,28 +42,44 @@ const MENU_ITEMS = [
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = usePageTransition();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  const handleNavClick = (e: React.MouseEvent, path: string) => {
+    e.preventDefault();
+    navigate(path);
+  };
+
+  const handleMenuClick = (e: React.MouseEvent, path: string) => {
+    e.preventDefault();
+    navigate(path);
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className="bg-dark-500 text-light relative z-50">
-      <div className="h-16 flex items-center justify-between max-w-[1280px] mx-auto px-4 md:px-8">
+      <div className="h-16 flex items-center justify-between max-w-[1280px] mx-auto">
         <div className="flex-shrink-0">
-          <NavLink to="/">
+          <NavLink
+            to="/"
+            onClick={(e) => handleNavClick(e, '/')}
+          >
             <Logo className="h-16 w-auto text-primary-400" />
           </NavLink>
         </div>
 
-        <div className="flex items-center gap-12 font-jp relative">
-          <nav className="flex items-center gap-8">
+        <div className="flex items-center gap-4 font-jp font-light relative">
+          <nav className="flex items-center">
             {NAV_ITEMS.map((item, index) => {
               const Icon = item.icon;
               return (
                 <NavLink
                   key={index}
                   to={item.path}
+                  onClick={(e) => handleNavClick(e, item.path)}
                   className={({ isActive }) =>
-                    `flex items-center gap-2 group ${isActive ? 'text-primary-400' : 'text-light'}`
+                    `min-w-40 h-12 flex items-center gap-2 p-2 group ${isActive ? 'text-primary-400' : 'text-light'}`
                   }
                 >
                   <div className="relative">
@@ -92,16 +109,16 @@ export const Header = () => {
           </button>
 
           {isMenuOpen && (
-            <div className="absolute top-full right-0 mt-4 w-72 bg-gray-400 text-light font-jp shadow-xl">
+            <div className="absolute top-full right-0 mt-4 w-72 bg-gray-400 text-light font-jp font-light shadow-xl text-md">
               <ul className="flex flex-col">
                 {MENU_ITEMS.map((item, index) => (
                   <li key={index} className="border-b border-light/20 last:border-b-0 w-full">
                     <NavLink
                       to={item.path}
+                      onClick={(e) => handleMenuClick(e, item.path)}
                       className={({ isActive }) =>
-                        `block px-8 py-6 text-lg hover:bg-dark-600 hover:text-primary-400 transition-colors ${isActive ? 'bg-dark-600 text-primary-400' : 'text-light'}`
+                        `block px-8 py-5.75 hover:bg-dark-600 hover:text-primary-400 transition-colors ${isActive ? 'bg-dark-600 text-primary-400' : 'text-light'}`
                       }
-                      onClick={() => setIsMenuOpen(false)}
                     >
                       {item.label}
                     </NavLink>
