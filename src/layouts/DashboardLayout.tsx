@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { ScrollToTopButton } from '../components/Button/ScrollToTopButton';
 import Footer from '../components/Footer';
 import { Header } from '../components/Header';
 
@@ -10,6 +11,7 @@ export const DashboardLayout = () => {
         <Outlet />
       </main>
       <Footer />
+      <ScrollToTopButton />
     </div>
   );
 };
