@@ -7,6 +7,7 @@ import IconInfo from '../../assets/svgs/icon_info.svg?react';
 import IconMemo from '../../assets/svgs/icon_memo.svg?react';
 import IconMenu from '../../assets/svgs/icon_menu.svg?react';
 import Logo from '../../assets/svgs/logo.svg?react';
+import { useAuth } from '../../contexts/AuthContext';
 import { usePageTransition } from '../../hooks/usePageTransition';
 
 const NAV_ITEMS = [
@@ -14,34 +15,38 @@ const NAV_ITEMS = [
     icon: IconMemo,
     label: '自分の記録',
     path: '/my-record',
-    hasBadge: false
+    hasBadge: false,
+    protected: true,
   },
   {
     icon: IconChallenge,
     label: 'チャレンジ',
     path: '/challenge',
-    hasBadge: false
+    hasBadge: false,
+    protected: true,
   },
   {
     icon: IconInfo,
     label: 'お知らせ',
     path: '/notice',
     hasBadge: true,
-    badgeCount: 1
+    badgeCount: 1,
+    protected: true,
   },
 ];
 
 const MENU_ITEMS = [
-  { label: '自分の記録', path: '/my-record' },
-  { label: '体重グラフ', path: '/weight-graph' },
-  { label: '目標', path: '/goal' },
-  { label: '選択中のコース', path: '/selected-course' },
-  { label: 'コラム一覧', path: '/column-list' },
-  { label: '設定', path: '/settings' },
+  { label: '自分の記録', path: '/my-record', protected: true },
+  { label: '体重グラフ', path: '/weight-graph', protected: true },
+  { label: '目標', path: '/goal', protected: true },
+  { label: '選択中のコース', path: '/selected-course', protected: true },
+  { label: 'コラム一覧', path: '/column-list', protected: false },
+  { label: '設定', path: '/settings', protected: true },
 ];
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
   const navigate = usePageTransition();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -57,13 +62,29 @@ export const Header = () => {
     setIsMenuOpen(false);
   };
 
+  const handleLogout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    logout();
+    navigate('/login');
+    setIsMenuOpen(false);
+  };
+
+  const handleLogin = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate('/login');
+    setIsMenuOpen(false);
+  };
+
+  const filteredNavItems = NAV_ITEMS.filter(item => isAuthenticated || !item.protected);
+  const filteredMenuItems = MENU_ITEMS.filter(item => isAuthenticated || !item.protected);
+
   return (
     <header className="bg-dark-500 text-light relative z-50">
       <div className="h-16 flex items-center justify-between max-w-[1280px] mx-auto">
         <div className="flex-shrink-0">
           <NavLink
             to="/"
-            onClick={(e) => handleNavClick(e, '/')}
+            onClick={(e) => handleNavClick(e, isAuthenticated ? '/' : '/column-list')}
           >
             <Logo className="h-16 w-auto text-primary-400" />
           </NavLink>
@@ -71,7 +92,7 @@ export const Header = () => {
 
         <div className="flex items-center gap-4 font-jp font-light relative">
           <nav className="flex items-center">
-            {NAV_ITEMS.map((item, index) => {
+            {filteredNavItems.map((item, index) => {
               const Icon = item.icon;
               return (
                 <NavLink
@@ -111,7 +132,7 @@ export const Header = () => {
           {isMenuOpen && (
             <div className="absolute top-full right-0 mt-4 w-72 bg-gray-400 text-light font-jp font-light shadow-xl text-md">
               <ul className="flex flex-col">
-                {MENU_ITEMS.map((item, index) => (
+                {filteredMenuItems.map((item, index) => (
                   <li key={index} className="border-b border-light/20 last:border-b-0 w-full">
                     <NavLink
                       to={item.path}
@@ -124,6 +145,19 @@ export const Header = () => {
                     </NavLink>
                   </li>
                 ))}
+                {isAuthenticated ? (
+                  <li className="border-b border-light/20 last:border-b-0 w-full">
+                    <a href="#" onClick={handleLogout} className="block px-8 py-5.75 hover:bg-dark-600 hover:text-primary-400 transition-colors text-light">
+                      ログアウト
+                    </a>
+                  </li>
+                ) : (
+                  <li className="border-b border-light/20 last:border-b-0 w-full">
+                    <a href="#" onClick={handleLogin} className="block px-8 py-5.75 hover:bg-dark-600 hover:text-primary-400 transition-colors text-light">
+                      ログイン
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
           )}
